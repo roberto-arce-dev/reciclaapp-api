@@ -102,6 +102,56 @@ export class TransaccionController {
     return { success: true, data, total: data.length };
   }
 
+  @Get('usuario/:usuarioId')
+  @ApiOperation({ summary: 'Obtener transacciones de un usuario' })
+  @ApiParam({ name: 'usuarioId', description: 'ID del usuario' })
+  @ApiResponse({ status: 200, description: 'Historial de reciclajes del usuario' })
+  async findByUsuario(@Param('usuarioId') usuarioId: string) {
+    const data = await this.transaccionService.findByUsuario(usuarioId);
+    return { success: true, data, total: data.length };
+  }
+
+  @Post('registrar-reciclaje')
+  @HttpCode(HttpStatus.CREATED)
+  @ApiOperation({ summary: 'Registrar transacción de reciclaje' })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        usuarioId: { type: 'string', description: 'ID del usuario' },
+        materialId: { type: 'string', description: 'ID del material reciclado' },
+        puntoRecoleccionId: { type: 'string', description: 'ID del punto de recolección' },
+        cantidad: { type: 'number', description: 'Cantidad reciclada' },
+        unidad: { type: 'string', description: 'Unidad de medida (kg, unidades, etc.)' }
+      },
+      required: ['usuarioId', 'materialId', 'puntoRecoleccionId', 'cantidad']
+    }
+  })
+  @ApiResponse({ status: 201, description: 'Reciclaje registrado exitosamente' })
+  async registrarReciclaje(@Body() reciclajeDto: {
+    usuarioId: string;
+    materialId: string;
+    puntoRecoleccionId: string;
+    cantidad: number;
+    unidad?: string;
+  }) {
+    const data = await this.transaccionService.registrarReciclaje(reciclajeDto);
+    return {
+      success: true,
+      message: 'Reciclaje registrado exitosamente',
+      data,
+    };
+  }
+
+  @Get('usuario/:usuarioId/puntos')
+  @ApiOperation({ summary: 'Obtener puntos acumulados por usuario' })
+  @ApiParam({ name: 'usuarioId', description: 'ID del usuario' })
+  @ApiResponse({ status: 200, description: 'Puntos totales del usuario' })
+  async getPuntosUsuario(@Param('usuarioId') usuarioId: string) {
+    const data = await this.transaccionService.getPuntosUsuario(usuarioId);
+    return { success: true, data };
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Obtener Transaccion por ID' })
   @ApiParam({ name: 'id', description: 'ID del Transaccion' })

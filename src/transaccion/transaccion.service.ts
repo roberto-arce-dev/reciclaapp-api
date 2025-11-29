@@ -49,4 +49,18 @@ export class TransaccionService {
       throw new NotFoundException(`Transaccion con ID ${id} no encontrado`);
     }
   }
+  async findByUsuario(usuarioId: string): Promise<Transaccion[]> {
+    return this.transaccionModel.find({ usuario: usuarioId });
+  }
+  async registrarReciclaje(reciclajeDto: any): Promise<Transaccion> {
+    const transaccion = await this.transaccionModel.create(reciclajeDto);
+    return transaccion;
+  }
+  async getPuntosUsuario(usuarioId: string): Promise<number> {
+    const transacciones = await this.transaccionModel.find({ usuario: usuarioId });
+    return transacciones.reduce((sum, t: any) => sum + (t.puntos || 0), 0);
+  }
+
+
+
 }

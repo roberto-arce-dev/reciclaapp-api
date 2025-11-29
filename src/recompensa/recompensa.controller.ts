@@ -102,6 +102,51 @@ export class RecompensaController {
     return { success: true, data, total: data.length };
   }
 
+  @Get('disponibles/:usuarioId')
+  @ApiOperation({ summary: 'Obtener recompensas disponibles para canjear' })
+  @ApiParam({ name: 'usuarioId', description: 'ID del usuario para verificar puntos' })
+  @ApiResponse({ status: 200, description: 'Recompensas que el usuario puede canjear' })
+  async findDisponibles(@Param('usuarioId') usuarioId: string) {
+    const data = await this.recompensaService.findDisponibles(usuarioId);
+    return { success: true, data, total: data.length };
+  }
+
+  @Get('usuario/:usuarioId/canjeadas')
+  @ApiOperation({ summary: 'Obtener recompensas canjeadas por usuario' })
+  @ApiParam({ name: 'usuarioId', description: 'ID del usuario' })
+  @ApiResponse({ status: 200, description: 'Historial de recompensas canjeadas' })
+  async findCanjeadas(@Param('usuarioId') usuarioId: string) {
+    const data = await this.recompensaService.findCanjeadas(usuarioId);
+    return { success: true, data, total: data.length };
+  }
+
+  @Post('canjear')
+  @HttpCode(HttpStatus.CREATED)
+  @ApiOperation({ summary: 'Canjear recompensa con puntos' })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        usuarioId: { type: 'string', description: 'ID del usuario' },
+        recompensaId: { type: 'string', description: 'ID de la recompensa a canjear' }
+      },
+      required: ['usuarioId', 'recompensaId']
+    }
+  })
+  @ApiResponse({ status: 201, description: 'Recompensa canjeada exitosamente' })
+  @ApiResponse({ status: 400, description: 'Puntos insuficientes' })
+  async canjearRecompensa(@Body() canjeDto: {
+    usuarioId: string;
+    recompensaId: string;
+  }) {
+    const data = await this.recompensaService.canjearRecompensa(canjeDto);
+    return {
+      success: true,
+      message: 'Recompensa canjeada exitosamente',
+      data,
+    };
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Obtener Recompensa por ID' })
   @ApiParam({ name: 'id', description: 'ID del Recompensa' })

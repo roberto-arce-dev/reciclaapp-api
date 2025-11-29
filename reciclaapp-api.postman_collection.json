@@ -413,6 +413,163 @@
           }
         }
       ]
+    },
+    {
+      "name": "Transacción",
+      "item": [
+        {
+          "name": "Mis Transacciones",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/transaccion/usuario/{{usuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "transaccion",
+                "usuario",
+                "{{usuarioId}}"
+              ]
+            },
+            "description": "Historial de reciclajes del usuario"
+          },
+          "response": []
+        },
+        {
+          "name": "Registrar Reciclaje",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/transaccion/registrar-reciclaje",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "transaccion",
+                "registrar-reciclaje"
+              ]
+            },
+            "description": "Registrar nueva transacción de reciclaje",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuarioId\": \"{{usuarioId}}\",\n  \"materialId\": \"{{materialId}}\",\n  \"puntoRecoleccionId\": \"{{puntoRecoleccionId}}\",\n  \"cantidad\": 5,\n  \"unidad\": \"kg\"\n}"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Mis Puntos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/transaccion/usuario/{{usuarioId}}/puntos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "transaccion",
+                "usuario",
+                "{{usuarioId}}",
+                "puntos"
+              ]
+            },
+            "description": "Obtener puntos acumulados"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints específicos de Transacción"
+    },
+    {
+      "name": "Recompensa",
+      "item": [
+        {
+          "name": "Recompensas Disponibles",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/recompensa/disponibles/{{usuarioId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "recompensa",
+                "disponibles",
+                "{{usuarioId}}"
+              ]
+            },
+            "description": "Recompensas que el usuario puede canjear"
+          },
+          "response": []
+        },
+        {
+          "name": "Canjear Recompensa",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/recompensa/canjear",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "recompensa",
+                "canjear"
+              ]
+            },
+            "description": "Canjear recompensa con puntos",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuarioId\": \"{{usuarioId}}\",\n  \"recompensaId\": \"{{recompensaId}}\"\n}"
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints específicos de Recompensa"
     }
   ],
   "variable": [

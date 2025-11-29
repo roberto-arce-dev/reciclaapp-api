@@ -45,4 +45,17 @@ export class RecompensaService {
       throw new NotFoundException(`Recompensa con ID ${id} no encontrado`);
     }
   }
+  async findDisponibles(usuarioId: string): Promise<Recompensa[]> {
+    return this.recompensaModel.find({ disponible: true, activa: true });
+  }
+  async findCanjeadas(usuarioId: string): Promise<Recompensa[]> {
+    return this.recompensaModel.find({ usuariosCanjeados: usuarioId });
+  }
+  async canjearRecompensa(canjeDto: any): Promise<Recompensa> {
+    // TODO: Implementar lógica de canje
+    throw new Error('Método no implementado');
+  }
+
+
+
 }
