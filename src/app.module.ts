@@ -9,6 +9,11 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './upload/upload.module';
 import { UsuarioProfileModule } from './usuario-profile/usuario-profile.module';
+import { PuntoRecoleccionModule } from './puntorecoleccion/puntorecoleccion.module';
+import { MaterialRecicladoModule } from './materialreciclado/materialreciclado.module';
+import { RecompensaModule } from './recompensa/recompensa.module';
+import { TransaccionModule } from './transaccion/transaccion.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @Module({
   imports: [
@@ -41,6 +46,11 @@ import { UsuarioProfileModule } from './usuario-profile/usuario-profile.module';
     AuthModule,
     UsuarioProfileModule,
     UploadModule,
+    PuntoRecoleccionModule,
+    MaterialRecicladoModule,
+    RecompensaModule,
+    TransaccionModule,
+    UsuarioModule,
   ],
   controllers: [AppController],
   providers: [
