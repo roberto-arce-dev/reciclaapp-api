@@ -355,7 +355,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nombre\": \"Nombre Actualizado\",\n  \"telefono\": \"+51 987654321\"\n}"
+              "raw": "{\n  \"nombre\": \"Valor de nombre\",\n  \"telefono\": \"+51 900000000\",\n  \"direccion\": \"Valor de direccion\",\n  \"puntos\": \"Valor de puntos\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/usuario-profile/me",
@@ -576,6 +576,41 @@
     {
       "key": "baseUrl",
       "value": "http://localhost:3016/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "filename",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "usuarioId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "materialId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "puntoRecoleccionId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "recompensaId",
+      "value": "",
       "type": "string"
     }
   ]
